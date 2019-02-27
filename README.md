@@ -8,7 +8,7 @@ Server Configuration
 
 Configure your server to rewrite requests to your routing index. The following example is for the [NGINX](https://nginx.org) web server and rewrites all requests, excluding existing files and directories, to the `index.html` file.
 
-```
+```nginx
 location / {
 	try_files $uri $uri/ /index.html?$args;
 }
@@ -21,13 +21,13 @@ Basic Usage
 
 Create a new router instance. The current version does not offer any configurable options.
 
-```
+```js
 const router = new Router();
 ```
 
 Register your custom routes and define local handlers within the setup functions. Note that routes are always resolved in the order they have been registered and can in some cases conflict with each other.
 
-```
+```js
 router.route('/products', function () {
 	this.enter(function (current, resolve) {
 		document.body.innerHTML = 'Products';
@@ -52,7 +52,7 @@ router.route('/products/:id/:name?', function () {
 
 Call the listener to complete the router setup and resolve the current location. Attaches the default window event listeners required for history navigation, scroll restoration and click detection.
 
-```
+```js
 router.listen();
 ```
 
@@ -61,7 +61,7 @@ Asynchronous Usage
 
 Route resolving can be paused within all handlers to wait for certain tasks to be completed, such as page transition animations or asynchronous requests. Resuming the router will execute the next handler in the stack.
 
-```
+```js
 router.route('/products', function () {
 	this.enter(function (current, resolve) {
 		window.setTimeout(() => {
@@ -77,9 +77,9 @@ router.route('/products', function () {
 Scroll Restoration
 ------------------
 
-By default the scroll position is updated at the end of the handler stack. You can however call the scroll restoration function manually and additionally implement a custom behavior.
+By default the scroll position is updated at the end of the handler stack. You can however call the scroll restoration function manually and optionally implement a custom behavior.
 
-```
+```js
 router.route('/products', function () {
 	this.enter(function (current, resolve, scrollRestoration) {
 		scrollRestoration(function (scrollPosition) {
@@ -98,7 +98,7 @@ Fallback Route
 
 Register a fallback route to catch requests that could not be resolved by any of the preceding routes. Note that this method will still return the HTTP status code `200` unless error pages are handled on the server-side.
 
-```
+```js
 router.route('/:fallback', function () {
 	this.match({
 		fallback: '.*'
