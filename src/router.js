@@ -1,5 +1,5 @@
 /*!
- * JavaScript Router v1.0.1
+ * JavaScript Router v1.0.2
  * https://github.com/lrdn/router-js
  *
  * Copyright (c) 2019 LRDN <git@lrdn.net>
@@ -468,6 +468,7 @@ const Router = (function () {
 				}
 
 				const navigation = (
+					typeof window.performance.getEntriesByType === 'function' &&
 					window.performance.getEntriesByType('navigation').shift() ||
 					window.performance.navigation
 				);
