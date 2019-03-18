@@ -1,5 +1,5 @@
 /*!
- * JavaScript Router v1.0.0
+ * JavaScript Router v1.0.1
  * https://github.com/lrdn/router-js
  *
  * Copyright (c) 2019 LRDN <git@lrdn.net>
@@ -358,8 +358,9 @@ const Router = (function () {
 				for (let [path, route] of self.routes) {
 					if (filter === null || path.indexOf(filter) === 0) {
 						routes.push({
-							path: path,
-							pattern: route.pattern
+							meta: mergeObjects({}, route.meta),
+							pattern: route.pattern,
+							path: path
 						});
 					}
 				}
