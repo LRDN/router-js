@@ -147,7 +147,7 @@ Matches path parameters using a regular expression string or filter function.
 Defines custom meta data accessible in every routing handler argument.
 
 `router.routes([string filter])`\
-Returns an array of route paths and their generated matching patterns.
+Returns an array of route paths, including their patterns and meta data.
 
 `router.listen()`\
 Attaches the default event listeners and resolves the current location.
