@@ -1,5 +1,5 @@
 /*!
- * JavaScript Router v1.0.2
+ * JavaScript Router v1.0.3
  * https://github.com/lrdn/router-js
  *
  * Copyright (c) 2019 LRDN <git@lrdn.net>
@@ -225,10 +225,7 @@ const Router = (function () {
 			if (typeof callback === 'function') {
 				callback.call(this, scrollPosition);
 			} else {
-				window.scrollTo({
-					left: scrollPosition.x,
-					top: scrollPosition.y
-				});
+				window.scrollTo(scrollPosition.x, scrollPosition.y);
 			}
 
 			self.routing.scroll = true;
@@ -445,9 +442,9 @@ const Router = (function () {
 				if (url = ensureInternalURL(url)) {
 					if (url.href !== window.location.href) {
 						try {
-							window.history.pushState({}, '', url);
+							window.history.pushState({}, '', url.href);
 						} catch (error) {
-							window.location.assign(url);
+							window.location.assign(url.href);
 							return;
 						}
 					}
