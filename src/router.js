@@ -1,5 +1,5 @@
 /*!
- * JavaScript Router v1.0.3
+ * JavaScript Router v1.0.4
  * https://github.com/lrdn/router-js
  *
  * Copyright (c) 2019 LRDN <git@lrdn.net>
@@ -89,9 +89,9 @@ const Router = (function () {
 		}
 
 		function createPattern(path, route) {
-			const parse = path.split(/(\/?\\?:\w+\??)/g);
+			path = path.split(/(\/?\\?:\w+\??)/g);
 
-			for (let [index, segment] of parse.entries()) {
+			for (let segment of path) {
 				let parameter = segment.match(/^(\/)?:(\w+)(\?)?$/);
 
 				if (parameter === null) {
@@ -106,7 +106,7 @@ const Router = (function () {
 					escapeMatch(route.matches[name]) : '[^/]+'
 				) + ')';
 
-				if (prefix && optional && parse[index + 1] === '') {
+				if (prefix && optional) {
 					parameter = '(?:' + parameter + ')';
 				}
 
